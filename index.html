@@ -4,34 +4,45 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>소원 상자</title>
+<meta name="apple-mobile-web-app-title" content="기리고">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://w3.org' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' fill='%23090305'/%3E%3Ccircle cx='90' cy='90' r='68' fill='none' stroke='%23b8860b' stroke-width='4'/%3E%3Ccircle cx='90' cy='90' r='54' fill='none' stroke='%238b0000' stroke-width='3' stroke-dasharray='8 5'/%3E%3Cpolygon points='90,26 106,74 154,90 106,106 90,154 74,106 26,90 74,74' fill='none' stroke='%23d4af37' stroke-width='3.5'/%3E%3Ccircle cx='90' cy='90' r='10' fill='%23b31b1b'/%3E%3C/svg%3E">
+<title>기리고</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:radial-gradient(circle,#1a0b12 0%,#050505 100%);color:#e6d5b8;font-family:sans-serif;height:100vh;display:flex;justify-content:center;align-items:center;overflow:hidden}
-.app{width:100%;max-width:400px;height:100%;max-height:750px;padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;text-align:center;border:1px solid #3a1c24;background:rgba(10,8,10,.85);box-shadow:0 0 40px rgba(139,0,0,.25)}
-.symbol{font-size:40px;color:#b8860b;text-shadow:0 0 15px rgba(184,134,11,.6);margin-bottom:8px;transition:transform 2s ease}
-.spin{transform:rotate(360deg)}
-h1{font-size:22px;letter-spacing:3px;font-weight:400;color:#d4af37}
-.counter{margin-top:10px;font-size:13px;color:#9e4747}
+body{background:radial-gradient(circle,#1c080d 0%,#040304 100%);color:#e6d5b8;font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;height:100vh;display:flex;justify-content:center;align-items:center;overflow:hidden}
+.app{width:100%;max-width:400px;height:100%;max-height:760px;padding:26px 24px;display:flex;flex-direction:column;justify-content:space-between;text-align:center;border:1px solid #3d161e;background:rgba(10,6,8,.9);box-shadow:0 0 45px rgba(150,0,0,.3)}
+.seal{width:84px;height:84px;margin:0 auto 10px;transition:transform 2.5s cubic-bezier(.22,1,.36,1);filter:drop-shadow(0 0 12px rgba(212,175,55,.45))}
+.spin{transform:rotate(360deg) scale(1.06)}
+h1{font-size:26px;letter-spacing:8px;font-weight:600;color:#d4af37;text-shadow:0 0 12px rgba(212,175,55,.4);padding-left:8px}
+.counter{margin-top:8px;font-size:13px;color:#a84444;letter-spacing:1px}
 .area{display:flex;flex-direction:column;gap:14px}
-textarea{width:100%;height:100px;background:rgba(255,255,255,.04);border:1px solid #4a252c;border-radius:8px;padding:12px;color:#f5ebd6;font-size:15px;resize:none;outline:none}
-button{background:linear-gradient(135deg,#4a0e17 0%,#240509 100%);color:#e6d5b8;border:1px solid #8b3a3a;padding:14px;border-radius:8px;font-size:16px;letter-spacing:2px}
+textarea{width:100%;height:100px;background:rgba(255,255,255,.03);border:1px solid #4d2028;border-radius:8px;padding:12px;color:#f5ebd6;font-size:15px;resize:none;outline:none}
+textarea:focus{border-color:#b8860b}
+button{background:linear-gradient(135deg,#520d17 0%,#240408 100%);color:#f0dec0;border:1px solid #963838;padding:14px;border-radius:8px;font-size:16px;letter-spacing:3px;font-weight:500;box-shadow:0 4px 15px rgba(139,0,0,.3)}
+button:active{transform:scale(.98)}
 button:disabled,textarea:disabled{opacity:.4}
-.status{min-height:130px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-size:14px;line-height:1.4;opacity:0;transition:opacity .8s ease}
+.status{min-height:135px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-size:14px;line-height:1.4;opacity:0;transition:opacity .8s ease}
 .show{opacity:1}
 .granted{color:#d4af37;font-weight:bold;font-size:15px}
-.warn{color:#c93b3b;font-size:13px}
-.timer-box{margin-top:6px;padding:8px 14px;border:1px solid #5c1922;border-radius:6px;background:rgba(74,14,23,.25)}
-.timer-label{font-size:11px;color:#a86464;letter-spacing:1px}
-.timer{font-family:monospace;font-size:24px;color:#ff3b3b;font-weight:bold;letter-spacing:2px;text-shadow:0 0 10px rgba(255,59,59,.6)}
-.footer{font-size:11px;color:#5c4b4b}
+.warn{color:#cf3838;font-size:13px}
+.timer-box{margin-top:6px;padding:8px 16px;border:1px solid #631822;border-radius:6px;background:rgba(74,14,23,.3)}
+.timer-label{font-size:11px;color:#b06868;letter-spacing:1px}
+.timer{font-family:monospace;font-size:24px;color:#ff3333;font-weight:bold;letter-spacing:2px;text-shadow:0 0 10px rgba(255,51,51,.65)}
+.footer{font-size:11px;color:#5e4949}
 </style>
 </head>
 <body>
 <div class="app">
-  <div style="margin-top:15px">
-    <div class="symbol" id="sym">❖</div>
-    <h1>소원 상자</h1>
+  <div style="margin-top:10px">
+    <svg class="seal" id="sym" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="54" fill="none" stroke="#b8860b" stroke-width="2"/>
+      <circle cx="60" cy="60" r="46" fill="none" stroke="#8b1a1a" stroke-width="1.5" stroke-dasharray="5 3"/>
+      <polygon points="60,10 71,49 110,60 71,71 60,110 49,71 10,60 49,49" fill="none" stroke="#d4af37" stroke-width="2"/>
+      <polygon points="25,25 60,44 95,25 76,60 95,95 60,76 25,95 44,60" fill="none" stroke="#a32626" stroke-width="1.5"/>
+      <circle cx="60" cy="60" r="14" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+      <circle cx="60" cy="60" r="5" fill="#c92a2a"/>
+    </svg>
+    <h1>기리고</h1>
     <div class="counter" id="cnt">남은 소원: 7 / 7</div>
   </div>
   <div class="area">
@@ -49,10 +60,10 @@ button:disabled,textarea:disabled{opacity:.4}
   <div class="footer">7번째 소원이 끝나면, 모든 것을 잃게 됩니다.</div>
 </div>
 <script>
-let n=localStorage.getItem('sowon_n')!==null?parseInt(localStorage.getItem('sowon_n')):7;
-let end=localStorage.getItem('sowon_end')?parseInt(localStorage.getItem('sowon_end')):0;
+let n=localStorage.getItem('girigo_n')!==null?parseInt(localStorage.getItem('girigo_n')):7;
+let end=localStorage.getItem('girigo_end')?parseInt(localStorage.getItem('girigo_end')):0;
 let iv=null;
-const w=["곧 현실이 될 것입니다...","주변을 조심하세요.","대가가 이미 시작되었습니다.","돌이킬 수 없습니다.","누군가 당신의 곁을 떠날 것입니다.","마지막 기회가 다가오고 있습니다.","이제 상자가 당신의 영혼을 거둡니다."];
+const w=["곧 현실이 될 것입니다...","주변을 조심하세요.","대가가 이미 시작되었습니다.","돌이킬 수 없습니다.","누군가 당신의 곁을 떠날 것입니다.","마지막 기회가 다가오고 있습니다.","이제 기리고가 당신의 영혼을 거둡니다."];
 function lock(){document.getElementById('btn').disabled=true;const i=document.getElementById('inp');i.disabled=true;i.placeholder="더 이상 소원을 빌 수 없습니다."}
 function startTmr(){
   if(!end)return;
@@ -82,8 +93,8 @@ function wish(){
   sound();m.classList.toggle('spin');
   const idx=7-n;n--;
   end=Date.now()+24*60*60*1000;
-  localStorage.setItem('sowon_n',n);
-  localStorage.setItem('sowon_end',end);
+  localStorage.setItem('girigo_n',n);
+  localStorage.setItem('girigo_end',end);
   document.getElementById('cnt').innerText=`남은 소원: ${n} / 7`;
   st.classList.remove('show');
   setTimeout(()=>{
