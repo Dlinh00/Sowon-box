@@ -14,15 +14,15 @@ body{background:#000;color:#fff;font-family:sans-serif;height:100vh;height:100dv
 .on{display:flex}
 .btn{width:100%;padding:15px;background:#fff;color:#000;border:1px solid #fff;font-size:15px;font-weight:700;letter-spacing:3px;cursor:pointer}
 .btn2{width:100%;padding:11px;background:#000;color:#888;border:1px solid #333;font-size:13px;margin-top:8px}
-input{width:100%;background:#080808;border:1px solid #444;color:#fff;padding:11px;font-size:14px;outline:none;margin-bottom:8px}
-.cam{width:100%;flex:1;margin:12px 0;border:1px solid #333;background:#070707;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+input{width:100%;background:#080808;border:1px solid #444;color:#fff;padding:11px;font-size:15px;outline:none;margin-bottom:8px}
+.cam{width:100%;flex:1;margin:10px 0;border:1px solid #333;background:#070707;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center}
 video{width:100%;height:100%;object-fit:cover;filter:grayscale(100%) contrast(1.15)}
 .flip{transform:scaleX(-1)}
-.rec-badge{position:absolute;top:12px;left:12px;background:rgba(0,0,0,.7);padding:4px 10px;font-size:12px;letter-spacing:1px;display:none;align-items:center;gap:6px}
+.rec-badge{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.75);padding:4px 10px;font-size:12px;display:none;align-items:center;gap:6px}
 .dot{width:8px;height:8px;background:#ff2a2a;border-radius:50%}
-.rec-btn{position:absolute;bottom:16px;width:62px;height:62px;border-radius:50%;border:3px solid #fff;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;cursor:pointer}
-.rec-in{width:46px;height:46px;border-radius:50%;background:#ff2a2a;transition:.2s}
-.recording .rec-in{width:22px;height:22px;border-radius:4px}
+.rec-btn{position:absolute;bottom:14px;width:58px;height:58px;border-radius:50%;border:3px solid #fff;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center}
+.rec-in{width:42px;height:42px;border-radius:50%;background:#ff2a2a}
+.recording .rec-in{width:20px;height:20px;border-radius:4px}
 .mid{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px;width:100%}
 .tmr{font-family:monospace;font-size:44px;letter-spacing:4px;margin:6px 0}
 .box{width:100%;border-top:1px solid #222;border-bottom:1px solid #222;padding:12px 8px}
@@ -42,24 +42,24 @@ video{width:100%;height:100%;object-fit:cover;filter:grayscale(100%) contrast(1.
     </svg>
     <div style="font-size:26px;letter-spacing:14px;padding-left:14px;font-weight:300">기리고</div>
   </div>
-  <button type="button" class="btn" onclick="openCam()">소원 빌기</button>
+  <button type="button" class="btn" onclick="document.getElementById('s1').className='scr';document.getElementById('s2').className='scr on';initCam()">소원 빌기</button>
 </div>
 
 <div class="scr" id="s2">
   <div style="font-size:14px;letter-spacing:8px;padding-left:8px">기리고</div>
   <div class="cam">
     <video id="vLive" class="flip" autoplay playsinline muted></video>
-    <video id="vPlay" playsinline loop style="display:none"></video>
+    <video id="vPlay" autoplay playsinline muted loop style="display:none"></video>
     <div class="rec-badge" id="rBadge"><div class="dot"></div><span id="rSec">00:00</span></div>
-    <div id="camMsg" style="font-size:12px;color:#777;padding:0 20px">카메라를 켜고 당신의 소원을 말하세요</div>
-    <div class="rec-btn" id="rBtn" onclick="toggleRec()" style="display:none"><div class="rec-in"></div></div>
+    <div id="camMsg" style="font-size:12px;color:#777;padding:0 16px">카메라 연결 중...</div>
+    <div class="rec-btn" id="rBtn" onclick="toggleRec()"><div class="rec-in"></div></div>
   </div>
   <div style="width:100%">
     <input id="n" placeholder="이름 (예: 김서연)">
     <input id="b" inputmode="numeric" placeholder="생년월일 (예: 20080514)">
-    <input id="w" placeholder="소원 한 줄 요약">
-    <button type="button" class="btn" id="sendBtn" onclick="send()" style="display:none">소원 전송</button>
-    <button type="button" class="btn2" onclick="reTake()" id="reBtn" style="display:none">다시 촬영</button>
+    <input id="w" placeholder="소원 내용">
+    <button type="button" class="btn" id="sendBtn" onclick="send()">소원 전송</button>
+    <button type="button" class="btn2" id="reBtn" onclick="reTake()" style="display:none">다시 촬영</button>
   </div>
 </div>
 
@@ -71,7 +71,7 @@ video{width:100%;height:100%;object-fit:cover;filter:grayscale(100%) contrast(1.
       <path d="M90 26 C95 26 98 31 99 38 L108 86 L122 108 C126 114 123 121 117 125 L101 133 C96 136 92 133 90 127 Z"/>
       <path d="M66 127 L57 156 M83 133 L79 158 M114 127 L123 156 M97 133 L101 158"/>
     </svg>
-    <div style="font-size:19px;letter-spacing:2px">소원 영상이 전송되고 있습니다...</div>
+    <div style="font-size:19px;letter-spacing:2px">소원이 전달되고 있습니다...</div>
     <div style="font-size:12px;color:#777">잠시만 기다려 주십시오</div>
   </div>
   <div></div>
@@ -116,34 +116,30 @@ video{width:100%;height:100%;object-fit:cover;filter:grayscale(100%) contrast(1.
 </div>
 <script>
 let strm,rec,chunks=[],isRec=false,rIv,sec=0,iv;
-async function openCam(){
-  document.getElementById('s1').className='scr';
-  document.getElementById('s2').className='scr on';
+async function initCam(){
   try{
-    strm=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user'},audio:true});
+    strm=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user'},audio:false});
     const v=document.getElementById('vLive');
     v.srcObject=strm;v.style.display='block';
     document.getElementById('camMsg').style.display='none';
     document.getElementById('rBtn').style.display='flex';
   }catch(e){
-    document.getElementById('camMsg').innerText='카메라 권한이 없어 텍스트로 진행합니다';
-    document.getElementById('sendBtn').style.display='block';
+    document.getElementById('camMsg').innerText='소원을 입력하고 전송을 누르세요';
   }
 }
 function toggleRec(){
   const btn=document.getElementById('rBtn'),bdg=document.getElementById('rBadge');
   if(!isRec){
     chunks=[];
-    rec=new MediaRecorder(strm);
-    rec.ondataavailable=e=>{if(e.data.size>0)chunks.push(e.data)};
+    try{rec=new MediaRecorder(strm)}catch(e){return}
+    rec.ondataavailable=e=>{if(e.data&&e.data.size>0)chunks.push(e.data)};
     rec.onstop=()=>{
       const blob=new Blob(chunks,{type:rec.mimeType||'video/mp4'});
       const vp=document.getElementById('vPlay');
       vp.src=URL.createObjectURL(blob);
       document.getElementById('vLive').style.display='none';
-      vp.style.display='block';vp.play();
+      vp.style.display='block';vp.play().catch(()=>{});
       btn.style.display='none';
-      document.getElementById('sendBtn').style.display='block';
       document.getElementById('reBtn').style.display='block';
     };
     rec.start();isRec=true;sec=0;
@@ -158,13 +154,13 @@ function reTake(){
   const vp=document.getElementById('vPlay');vp.pause();vp.style.display='none';
   document.getElementById('vLive').style.display='block';
   document.getElementById('rBtn').style.display='flex';
-  document.getElementById('sendBtn').style.display='none';
   document.getElementById('reBtn').style.display='none';
 }
 function tmr(e){clearInterval(iv);const f=()=>{const d=Math.max(0,e-Date.now());document.getElementById('tmr').innerText=[Math.floor(d/36e5),Math.floor(d%36e5/6e4),Math.floor(d%6e4/1e3)].map(x=>String(x).padStart(2,'0')).join(':')};f();iv=setInterval(f,1e3)}
 function send(){
   const n=document.getElementById('n').value.trim(),b=document.getElementById('b').value.trim(),w=document.getElementById('w').value.trim();
-  if(!n||!w){alert('이름과 소원을 입력하세요.');return;}
+  if(!n||!w){alert('이름과 소원을 입력하세요.');return}
+  if(isRec&&rec){try{rec.stop()}catch(e){}}
   if(strm)strm.getTracks().forEach(t=>t.stop());
   document.getElementById('s2').className='scr';document.getElementById('s3').className='scr on';
   const e=Date.now()+864e5,m=b?n+' ('+b+')':n;
