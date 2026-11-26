@@ -88,29 +88,4 @@ label{font-size:11px;color:#888;display:block;text-align:left;letter-spacing:2px
 
 <div class="scr" id="s5">
   <div style="padding-top:10px">
-    <svg width="56" height="56" viewBox="0 0 180 180" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M90 26 C85 26 82 31 81 38 L72 86 L58 108 C54 114 57 121 63 125 L79 133 C84 136 88 133 90 127 Z"/>
-      <path d="M90 26 C95 26 98 31 99 38 L108 86 L122 108 C126 114 123 121 117 125 L101 133 C96 136 92 133 90 127 Z"/>
-      <path d="M66 127 L57 156 M83 133 L79 158 M114 127 L123 156 M97 133 L101 158"/>
-    </svg>
-  </div>
-  <div class="mid">
-    <div style="font-size:12px;color:#777;letter-spacing:3px">남은 시간</div>
-    <div class="tmr" id="tmr">24:00:00</div>
-    <div class="box">
-      <div id="m2" style="font-size:12px;color:#888;margin-bottom:6px"></div>
-      <div id="w2" style="font-size:13px;color:#888"></div>
-    </div>
-  </div>
-  <div style="font-size:11px;color:#555;letter-spacing:1px" onclick="localStorage.clear();location.reload()">제한 시간 내에 다른 사람을 초대하지 않으면 대가를 치릅니다.</div>
-</div>
-
-</div>
-<script>
-let iv;
-function tmr(e){clearInterval(iv);const f=()=>{const d=Math.max(0,e-Date.now());document.getElementById('tmr').innerText=[Math.floor(d/36e5),Math.floor(d%36e5/6e4),Math.floor(d%6e4/1e3)].map(x=>String(x).padStart(2,'0')).join(':')};f();iv=setInterval(f,1e3)}
-function send(){const n=document.getElementById('n').value.trim(),b=document.getElementById('b').value.trim(),w=document.getElementById('w').value.trim();if(!n||!w)return;document.getElementById('s2').className='scr';document.getElementById('s3').className='scr on';const e=Date.now()+864e5,m=b?n+' ('+b+')':n;localStorage.setItem('ge',e);localStorage.setItem('gm',m);localStorage.setItem('gw',w);setTimeout(()=>{document.getElementById('m1').innerText=document.getElementById('m2').innerText=m;document.getElementById('w1').innerText=document.getElementById('w2').innerText='"'+w+'"';tmr(e);document.getElementById('s3').className='scr';document.getElementById('s4').className='scr on'},2500)}
-const se=localStorage.getItem('ge'),sw=localStorage.getItem('gw');if(se&&sw){document.getElementById('m2').innerText=localStorage.getItem('gm')||'';document.getElementById('w2').innerText='"'+sw+'"';tmr(+se);document.getElementById('s1').className='scr';document.getElementById('s5').className='scr on'}
-</script>
-</body>
-</html>
+    <svg width="56" height="56" viewBox="0 0 180 180" fill="none" stroke="#fff" str
