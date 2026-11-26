@@ -6,66 +6,78 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="기리고">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://w3.org' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' fill='%23000000'/%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M90 36 L68 92 L54 114 L76 126 L90 104 Z'/%3E%3Cpath d='M90 36 L112 92 L126 114 L104 126 L90 104 Z'/%3E%3Cpath d='M62 120 L52 144 M118 120 L128 144'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://w3.org' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' fill='%23000000'/%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M90 30 C86 30 83 34 82 40 L74 84 L62 104 C59 109 61 115 66 118 L80 126 C84 128 88 126 90 121 Z'/%3E%3Cpath d='M90 30 C94 30 97 34 98 40 L106 84 L118 104 C121 109 119 115 114 118 L100 126 C96 128 92 126 90 121 Z'/%3E%3Cpath d='M78 48 L72 86 M84 38 L80 88 M102 48 L108 86 M96 38 L100 88' stroke-width='2' opacity='.75'/%3E%3Cpath d='M68 120 L60 148 M84 125 L80 150 M112 120 L120 148 M96 125 L100 150'/%3E%3C/g%3E%3C/svg%3E">
 <title>기리고</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{background:#000;color:#fff;font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;height:100vh;display:flex;justify-content:center;align-items:center;overflow:hidden}
-.app{width:100%;max-width:420px;height:100%;padding:36px 28px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative}
-.screen{display:none;width:100%;height:100%;flex-direction:column;justify-content:space-between;align-items:center;animation:fadeIn .7s ease}
+.app{width:100%;max-width:420px;height:100%;padding:32px 26px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;text-align:center;position:relative}
+.screen{display:none;width:100%;height:100%;flex-direction:column;justify-content:space-between;align-items:center;animation:fadeIn .65s ease}
 .screen.active{display:flex}
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-@keyframes pulse{0%,100%{opacity:.75;transform:scale(1)}50%{opacity:1;transform:scale(1.04)}}
-.hands{width:96px;height:96px;animation:pulse 3s infinite ease-in-out}
-.hands-sm{width:54px;height:54px;opacity:.85}
-.title{font-size:28px;letter-spacing:12px;font-weight:300;padding-left:12px;margin-top:18px}
-.sub{font-size:13px;color:#888;letter-spacing:2px;margin-top:10px}
-.btn{width:100%;padding:16px;background:#fff;color:#000;border:1px solid #fff;font-size:15px;font-weight:600;letter-spacing:4px;cursor:pointer;transition:all .2s}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes spinY{0%{transform:perspective(400px) rotateY(0deg)}100%{transform:perspective(400px) rotateY(360deg)}}
+.hands-wrap{width:120px;height:120px;display:flex;align-items:center;justify-content:center}
+.hands-spin{animation:spinY 7s linear infinite}
+.hands-fast{animation:spinY 1.8s linear infinite}
+.title{font-size:26px;letter-spacing:14px;font-weight:300;padding-left:14px;margin-top:14px}
+.sub{font-size:12px;color:#777;letter-spacing:2px;margin-top:8px}
+.btn{width:100%;padding:16px;background:#fff;color:#000;border:1px solid #fff;font-size:15px;font-weight:600;letter-spacing:4px;cursor:pointer}
 .btn:active{background:#000;color:#fff}
-.btn-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35);margin-top:12px;font-weight:400}
-.btn-ghost:active{background:#fff;color:#000}
-.input-group{width:100%;display:flex;flex-direction:column;gap:14px;text-align:left}
-label{font-size:12px;color:#999;letter-spacing:2px}
-input,textarea{width:100%;background:#000;border:1px solid #444;color:#fff;padding:14px;font-size:15px;outline:none;border-radius:0}
+.btn-ghost{background:transparent;color:#888;border:1px solid #333;margin-top:10px;font-weight:400;font-size:13px;padding:12px}
+.form{width:100%;display:flex;flex-direction:column;gap:12px;text-align:left;overflow-y:auto}
+label{font-size:11px;color:#888;letter-spacing:2px}
+input,textarea{width:100%;background:#080808;border:1px solid #333;color:#fff;padding:12px 14px;font-size:14px;outline:none;border-radius:0}
 input:focus,textarea:focus{border-color:#fff}
-textarea{height:130px;resize:none;line-height:1.6}
-.center-box{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;gap:20px}
+textarea{height:90px;resize:none;line-height:1.5}
+.cam-box{width:100%;height:130px;border:1px solid #333;background:#050505;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;cursor:pointer}
+video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1);display:none}
+.rec-dot{position:absolute;top:10px;left:12px;font-size:11px;color:#fff;letter-spacing:1px;display:none;align-items:center;gap:6px;background:rgba(0,0,0,.6);padding:3px 8px}
+.rec-dot span{width:7px;height:7px;background:#fff;border-radius:50%;animation:fadeIn .8s infinite alternate}
+.center-box{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;gap:18px;width:100%}
 .msg-main{font-size:20px;font-weight:400;letter-spacing:2px;line-height:1.6}
-.msg-wish{font-size:14px;color:#aaa;border-top:1px solid #222;border-bottom:1px solid #222;padding:14px 10px;width:100%;word-break:keep-all}
-.timer{font-family:'Courier New',monospace;font-size:44px;font-weight:300;letter-spacing:4px;margin:10px 0}
+.info-card{width:100%;border-top:1px solid #262626;border-bottom:1px solid #262626;padding:16px 10px;display:flex;flex-direction:column;gap:8px}
+.info-meta{font-size:12px;color:#777;letter-spacing:2px}
+.info-wish{font-size:15px;color:#fff;line-height:1.5;word-break:keep-all}
+.timer{font-family:'Courier New',monospace;font-size:46px;font-weight:300;letter-spacing:4px;margin:6px 0}
 .timer-desc{font-size:12px;color:#777;letter-spacing:3px}
-.reset-dot{position:absolute;bottom:14px;right:16px;width:24px;height:24px;opacity:0}
+.reset-dot{position:absolute;bottom:10px;right:10px;width:30px;height:30px;opacity:0}
 </style>
 </head>
 <body>
 <div class="app">
 
-  <!-- MÀN HÌNH 1: MỞ APP -->
+  <!-- MÀN HÌNH 1: MỞ APP (BÀN TAY CHẮP XOAY) -->
   <div class="screen active" id="s1">
     <div></div>
     <div class="center-box">
-      <svg class="hands" viewBox="0 0 120 120" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M60 18 L43 62 L32 80 L49 90 L60 72 Z"/>
-        <path d="M60 18 L77 62 L88 80 L71 90 L60 72 Z"/>
-        <path d="M38 85 L30 104 M82 85 L90 104"/>
-        <path d="M60 8 V12 M34 22 L37 25 M86 22 L83 25" stroke-width="1.5" opacity=".6"/>
-      </svg>
+      <div class="hands-wrap hands-spin">
+        <svg width="110" height="110" viewBox="0 0 180 180" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M90 26 C85 26 82 31 81 38 L72 86 L58 108 C54 114 57 121 63 125 L79 133 C84 136 88 133 90 127 Z"/>
+          <path d="M90 26 C95 26 98 31 99 38 L108 86 L122 108 C126 114 123 121 117 125 L101 133 C96 136 92 133 90 127 Z"/>
+          <path d="M76 46 L69 89 M83 35 L78 91 M104 46 L111 89 M97 35 L102 91" stroke-width="1.6" opacity=".7"/>
+          <path d="M66 127 L57 156 M83 133 L79 158 M114 127 L123 156 M97 133 L101 158"/>
+        </svg>
+      </div>
       <div class="title">기리고</div>
-      <div class="sub">소원을 들어주는 앱</div>
     </div>
     <button class="btn" onclick="go('s2')">소원 빌기</button>
   </div>
 
-  <!-- MÀN HÌNH 2: NHẬP ĐIỀU ƯỚC -->
+  <!-- MÀN HÌNH 2: NHẬP TÊN, NGÀY SINH, ĐIỀU ƯỚC & CAMERA -->
   <div class="screen" id="s2">
-    <div style="width:100%;text-align:center;padding-top:10px">
-      <div style="font-size:16px;letter-spacing:6px;padding-left:6px">기리고</div>
-    </div>
-    <div class="input-group">
+    <div style="font-size:15px;letter-spacing:8px;padding-left:8px">기리고</div>
+    <div class="form">
+      <div class="cam-box" onclick="startCam()">
+        <video id="vid" autoplay playsinline muted></video>
+        <div class="rec-dot" id="recDot"><span></span>REC</div>
+        <div id="camHint" style="font-size:12px;color:#777;letter-spacing:1px">+ 얼굴 인증 카메라 켜기 (선택)</div>
+      </div>
       <label>이름</label>
-      <input type="text" id="uName" placeholder="이름을 입력하세요">
-      <label style="margin-top:8px">당신의 소원</label>
-      <textarea id="uWish" placeholder="간절히 바라는 소원을 적으세요.&#10;소원이 이루어지면 대가가 따릅니다."></textarea>
+      <input type="text" id="uName" placeholder="예: 김서연">
+      <label>생년월일</label>
+      <input type="text" id="uBirth" inputmode="numeric" placeholder="예: 20080514">
+      <label>소원 내용</label>
+      <textarea id="uWish" placeholder="당신의 소원을 입력하세요."></textarea>
     </div>
     <div style="width:100%">
       <button class="btn" onclick="submitWish()">소원 전송</button>
@@ -73,17 +85,19 @@ textarea{height:130px;resize:none;line-height:1.6}
     </div>
   </div>
 
-  <!-- MÀN HÌNH 3: ĐANG THỰC HIỆN -->
+  <!-- MÀN HÌNH 3: ĐIỀU ƯỚC ĐANG ĐƯỢC THỰC HIỆN -->
   <div class="screen" id="s3">
     <div></div>
     <div class="center-box">
-      <svg class="hands" viewBox="0 0 120 120" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M60 18 L43 62 L32 80 L49 90 L60 72 Z"/>
-        <path d="M60 18 L77 62 L88 80 L71 90 L60 72 Z"/>
-        <path d="M38 85 L30 104 M82 85 L90 104"/>
-      </svg>
-      <div class="msg-main">소원 전송 중...</div>
-      <div class="sub">당신의 소원이 이루어지고 있습니다</div>
+      <div class="hands-wrap hands-fast">
+        <svg width="100" height="100" viewBox="0 0 180 180" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M90 26 C85 26 82 31 81 38 L72 86 L58 108 C54 114 57 121 63 125 L79 133 C84 136 88 133 90 127 Z"/>
+          <path d="M90 26 C95 26 98 31 99 38 L108 86 L122 108 C126 114 123 121 117 125 L101 133 C96 136 92 133 90 127 Z"/>
+          <path d="M66 127 L57 156 M83 133 L79 158 M114 127 L123 156 M97 133 L101 158"/>
+        </svg>
+      </div>
+      <div class="msg-main">소원이 전달되고 있습니다...</div>
+      <div class="sub">잠시만 기다려 주십시오</div>
     </div>
     <div></div>
   </div>
@@ -92,42 +106,63 @@ textarea{height:130px;resize:none;line-height:1.6}
   <div class="screen" id="s4">
     <div></div>
     <div class="center-box">
-      <svg class="hands-sm" viewBox="0 0 120 120" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M60 18 L43 62 L32 80 L49 90 L60 72 Z"/>
-        <path d="M60 18 L77 62 L88 80 L71 90 L60 72 Z"/>
-        <path d="M38 85 L30 104 M82 85 L90 104"/>
+      <svg width="64" height="64" viewBox="0 0 180 180" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M90 26 C85 26 82 31 81 38 L72 86 L58 108 C54 114 57 121 63 125 L79 133 C84 136 88 133 90 127 Z"/>
+        <path d="M90 26 C95 26 98 31 99 38 L108 86 L122 108 C126 114 123 121 117 125 L101 133 C96 136 92 133 90 127 Z"/>
+        <path d="M66 127 L57 156 M83 133 L79 158 M114 127 L123 156 M97 133 L101 158"/>
       </svg>
-      <div class="msg-main">당신의 소원이<br>이루어졌습니다.</div>
-      <div class="msg-wish" id="showWish"></div>
+      <div class="msg-main">소원이 이루어졌습니다.</div>
+      <div class="info-card">
+        <div class="info-meta" id="metaTxt"></div>
+        <div class="info-wish" id="showWish"></div>
+      </div>
     </div>
     <button class="btn" onclick="go('s5')">확인</button>
   </div>
 
   <!-- MÀN HÌNH 5: ĐỒNG HỒ ĐẾM NGƯỢC -->
   <div class="screen" id="s5">
-    <div style="padding-top:16px">
-      <svg class="hands-sm" viewBox="0 0 120 120" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M60 18 L43 62 L32 80 L49 90 L60 72 Z"/>
-        <path d="M60 18 L77 62 L88 80 L71 90 L60 72 Z"/>
-        <path d="M38 85 L30 104 M82 85 L90 104"/>
+    <div style="padding-top:14px">
+      <svg width="56" height="56" viewBox="0 0 180 180" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M90 26 C85 26 82 31 81 38 L72 86 L58 108 C54 114 57 121 63 125 L79 133 C84 136 88 133 90 127 Z"/>
+        <path d="M90 26 C95 26 98 31 99 38 L108 86 L122 108 C126 114 123 121 117 125 L101 133 C96 136 92 133 90 127 Z"/>
+        <path d="M66 127 L57 156 M83 133 L79 158 M114 127 L123 156 M97 133 L101 158"/>
       </svg>
     </div>
     <div class="center-box">
       <div class="timer-desc">남은 시간</div>
       <div class="timer" id="tmr">24:00:00</div>
-      <div class="msg-wish" id="finalWish" style="font-size:13px;color:#666"></div>
+      <div class="info-card">
+        <div class="info-meta" id="finalMeta"></div>
+        <div class="info-wish" id="finalWish" style="font-size:13px;color:#888"></div>
+      </div>
     </div>
-    <div style="font-size:11px;color:#444;letter-spacing:2px;padding-bottom:10px">시간이 끝나면 대가를 치르게 됩니다.</div>
+    <div style="font-size:11px;color:#555;letter-spacing:2px;padding-bottom:8px">제한 시간 내에 다른 사람을 초대하지 않으면 대가를 치릅니다.</div>
     <div class="reset-dot" onclick="resetApp()"></div>
   </div>
 
 </div>
 
 <script>
-let iv=null;
+let iv=null,stream=null;
 function go(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
+}
+async function startCam(){
+  if(stream)return;
+  try{
+    stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user'},audio:false});
+    const v=document.getElementById('vid');
+    v.srcObject=stream;v.style.display='block';
+    document.getElementById('camHint').style.display='none';
+    document.getElementById('recDot').style.display='flex';
+  }catch(e){
+    document.getElementById('camHint').innerText='카메라 권한이 거부되었습니다';
+  }
+}
+function stopCam(){
+  if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}
 }
 function sound(){
   try{
@@ -136,62 +171,3 @@ function sound(){
       const o=c.createOscillator(),g=c.createGain();
       o.type='sine';o.frequency.setValueAtTime(f,c.currentTime+i*.5);
       g.gain.setValueAtTime(.12,c.currentTime+i*.5);
-      g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+i*.5+1.4);
-      o.connect(g);g.connect(c.destination);
-      o.start(c.currentTime+i*.5);o.stop(c.currentTime+i*.5+1.5);
-    });
-  }catch(e){}
-}
-function submitWish(){
-  const name=document.getElementById('uName').value.trim();
-  const wish=document.getElementById('uWish').value.trim();
-  if(!wish)return;
-  sound();
-  go('s3');
-  const end=Date.now()+24*60*60*1000;
-  localStorage.setItem('girigo_v2_end',end);
-  localStorage.setItem('girigo_v2_wish',wish);
-  localStorage.setItem('girigo_v2_name',name);
-  setTimeout(()=>{
-    const label=name?`${name}님의 소원: "${wish}"`:`"${wish}"`;
-    document.getElementById('showWish').innerText=label;
-    document.getElementById('finalWish').innerText=label;
-    startTmr(end);
-    go('s4');
-  },3200);
-}
-function startTmr(end){
-  clearInterval(iv);
-  const tick=()=>{
-    const diff=Math.max(0,end-Date.now());
-    const h=String(Math.floor(diff/3600000)).padStart(2,'0');
-    const m=String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
-    const s=String(Math.floor((diff%60000)/1000)).padStart(2,'0');
-    document.getElementById('tmr').innerText=`${h}:${m}:${s}`;
-    if(diff<=0){
-      clearInterval(iv);
-      document.querySelector('.timer-desc').innerText='시간 종료';
-    }
-  };
-  tick();iv=setInterval(tick,1000);
-}
-function resetApp(){
-  localStorage.removeItem('girigo_v2_end');
-  localStorage.removeItem('girigo_v2_wish');
-  localStorage.removeItem('girigo_v2_name');
-  location.reload();
-}
-window.onload=()=>{
-  const savedEnd=localStorage.getItem('girigo_v2_end');
-  const savedWish=localStorage.getItem('girigo_v2_wish');
-  const savedName=localStorage.getItem('girigo_v2_name');
-  if(savedEnd&&savedWish){
-    const label=savedName?`${savedName}님의 소원: "${savedWish}"`:`"${savedWish}"`;
-    document.getElementById('finalWish').innerText=label;
-    startTmr(parseInt(savedEnd));
-    go('s5');
-  }
-};
-</script>
-</body>
-</html>
