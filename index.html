@@ -4,86 +4,143 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="기리고">
 <title>기리고</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{background:#000;color:#fff;font-family:sans-serif;height:100vh;height:100dvh;display:flex;justify-content:center;align-items:center;overflow:hidden}
-.app{width:100%;max-width:420px;height:100%;padding:24px;display:flex;flex-direction:column;justify-content:space-between;text-align:center}
-.scr{display:none;width:100%;height:100%;flex-direction:column;justify-content:space-between;align-items:center}
-.btn{width:100%;padding:16px;background:#fff;color:#000;border:none;font-size:16px;font-weight:700;letter-spacing:3px;cursor:pointer}
-.btn2{width:100%;padding:12px;background:#000;color:#888;border:1px solid #333;font-size:13px;margin-top:8px}
-input{width:100%;background:#0a0a0a;border:1px solid #444;color:#fff;padding:12px;font-size:15px;outline:none;margin-bottom:8px}
-.cam{width:100%;flex:1;margin:10px 0;border:1px solid #333;background:#050505;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
-video{width:100%;height:100%;object-fit:cover;filter:grayscale(100%) contrast(1.2)}
-.rec-btn{position:absolute;bottom:14px;width:56px;height:56px;border-radius:50%;border:3px solid #fff;display:none;align-items:center;justify-content:center}
-.rec-in{width:40px;height:40px;border-radius:50%;background:#ff2a2a}
-.mid{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px;width:100%}
-.tmr{font-family:monospace;font-size:44px;letter-spacing:4px}
-.box{width:100%;border-top:1px solid #222;border-bottom:1px solid #222;padding:12px 8px}
+body{margin:0;background:#000;color:#fff;font-family:sans-serif;height:100dvh;display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:30px 24px;box-sizing:border-box;text-align:center}
+.mid{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:16px}
+.btn{width:100%;max-width:380px;padding:16px;background:#fff;color:#000;text-decoration:none;font-size:16px;font-weight:700;letter-spacing:4px;display:block}
 </style>
 </head>
 <body>
-<div class="app">
-<div class="scr" id="s1" style="display:flex">
-  <div></div>
-  <div class="mid">
-    <svg width="110" height="110" viewBox="0 0 180 180" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M90 26 C85 26 82 31 81 38 L72 86 L58 108 C54 114 57 121 63 125 L79 133 C84 136 88 133 90 127 Z"/><path d="M90 26 C95 26 98 31 99 38 L108 86 L122 108 C126 114 123 121 117 125 L101 133 C96 136 92 133 90 127 Z"/><path d="M66 127 L57 156 M83 133 L79 158 M114 127 L123 156 M97 133 L101 158"/></svg>
-    <div style="font-size:26px;letter-spacing:14px;padding-left:14px;font-weight:300">기리고</div>
-  </div>
-  <button type="button" class="btn" onclick="document.getElementById('s1').style.display='none';document.getElementById('s2').style.display='flex';if(window.openCam)openCam()">소원 빌기</button>
+<div></div>
+<div class="mid">
+  <svg width="110" height="110" viewBox="0 0 180 180" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M90 26 C85 26 82 31 81 38 L72 86 L58 108 C54 114 57 121 63 125 L79 133 C84 136 88 133 90 127 Z"/><path d="M90 26 C95 26 98 31 99 38 L108 86 L122 108 C126 114 123 121 117 125 L101 133 C96 136 92 133 90 127 Z"/><path d="M66 127 L57 156 M83 133 L79 158 M114 127 L123 156 M97 133 L101 158"/></svg>
+  <div style="font-size:26px;letter-spacing:14px;padding-left:14px;font-weight:300">기리고</div>
 </div>
-<div class="scr" id="s2">
-  <div style="font-size:14px;letter-spacing:8px;padding-left:8px">기리고</div>
-  <div class="cam">
-    <video id="vLive" style="transform:scaleX(-1)" autoplay playsinline muted></video>
-    <video id="vPlay" autoplay playsinline muted loop style="display:none"></video>
-    <div id="rBdg" style="position:absolute;top:10px;left:10px;background:rgba(0,0,0,.75);padding:4px 10px;font-size:12px;display:none;gap:6px;align-items:center"><span style="width:8px;height:8px;background:#ff2a2a;border-radius:50%"></span><span id="rSec">00:00</span></div>
-    <div id="cMsg" style="font-size:12px;color:#777;padding:0 16px">소원을 입력하고 전송을 누르세요</div>
-    <div class="rec-btn" id="rBtn" onclick="if(window.toggleRec)toggleRec()"><div class="rec-in"></div></div>
-  </div>
-  <div style="width:100%">
-    <input id="n" placeholder="이름 (예: 김서연)">
-    <input id="b" inputmode="numeric" placeholder="생년월일 (예: 20080514)">
-    <input id="w" placeholder="소원 내용">
-    <button type="button" class="btn" onclick="if(window.sendWish)sendWish()">소원 전송</button>
-    <button type="button" class="btn2" id="reBtn" onclick="if(window.reTake)reTake()" style="display:none">다시 촬영</button>
-  </div>
+<a href="wish.html" class="btn">소원 빌기</a>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>기리고</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#000;color:#fff;font-family:sans-serif;height:100dvh;display:flex;flex-direction:column;justify-content:space-between;padding:24px;text-align:center}
+.cam{flex:1;margin:12px 0;border:1px solid #333;background:#080808;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+video{width:100%;height:100%;object-fit:cover;filter:grayscale(100%) contrast(1.2);transform:scaleX(-1)}
+input{width:100%;background:#0a0a0a;border:1px solid #444;color:#fff;padding:12px;font-size:15px;outline:none;margin-bottom:8px}
+.btn{width:100%;padding:15px;background:#fff;color:#000;border:none;font-size:15px;font-weight:700;letter-spacing:3px}
+</style>
+</head>
+<body>
+<div style="font-size:14px;letter-spacing:8px;padding-left:8px">기리고</div>
+<div class="cam">
+  <video id="v" autoplay playsinline muted></video>
+  <div id="msg" style="position:absolute;font-size:12px;color:#777">소원을 입력하고 전송을 누르세요</div>
 </div>
-<div class="scr" id="s3">
-  <div></div>
-  <div class="mid">
-    <svg width="95" height="95" viewBox="0 0 180 180" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M90 26 C85 26 82 31 81 38 L72 86 L58 108 C54 114 57 121 63 125 L79 133 C84 136 88 133 90 127 Z"/><path d="M90 26 C95 26 98 31 99 38 L108 86 L122 108 C126 114 123 121 117 125 L101 133 C96 136 92 133 90 127 Z"/><path d="M66 127 L57 156 M83 133 L79 158 M114 127 L123 156 M97 133 L101 158"/></svg>
-    <div style="font-size:19px;letter-spacing:2px">소원이 전달되고 있습니다...</div>
-  </div>
-  <div></div>
-</div>
-<div class="scr" id="s4">
-  <div></div>
-  <div class="mid">
-    <svg width="64" height="64" viewBox="0 0 180 180" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M90 26 C85 26 82 31 81 38 L72 86 L58 108 C54 114 57 121 63 125 L79 133 C84 136 88 133 90 127 Z"/><path d="M90 26 C95 26 98 31 99 38 L108 86 L122 108 C126 114 123 121 117 125 L101 133 C96 136 92 133 90 127 Z"/><path d="M66 127 L57 156 M83 133 L79 158 M114 127 L123 156 M97 133 L101 158"/></svg>
-    <div style="font-size:20px;letter-spacing:2px">소원이 이루어졌습니다.</div>
-    <div class="box"><div id="m1" style="font-size:12px;color:#888;margin-bottom:6px"></div><div id="w1" style="font-size:15px"></div></div>
-  </div>
-  <button type="button" class="btn" onclick="document.getElementById('s4').style.display='none';document.getElementById('s5').style.display='flex'">확인</button>
-</div>
-<div class="scr" id="s5">
-  <div style="padding-top:8px"><svg width="54" height="54" viewBox="0 0 180 180" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M90 26 C85 26 82 31 81 38 L72 86 L58 108 C54 114 57 121 63 125 L79 133 C84 136 88 133 90 127 Z"/><path d="M90 26 C95 26 98 31 99 38 L108 86 L122 108 C126 114 123 121 117 125 L101 133 C96 136 92 133 90 127 Z"/><path d="M66 127 L57 156 M83 133 L79 158 M114 127 L123 156 M97 133 L101 158"/></svg></div>
-  <div class="mid">
-    <div style="font-size:12px;color:#777;letter-spacing:3px">남은 시간</div>
-    <div class="tmr" id="tmr">24:00:00</div>
-    <div class="box"><div id="m2" style="font-size:12px;color:#888;margin-bottom:6px"></div><div id="w2" style="font-size:13px;color:#888"></div></div>
-  </div>
-  <div style="font-size:11px;color:#555" onclick="localStorage.clear();location.reload()">제한 시간 내에 다른 사람을 초대하지 않으면 대가를 치릅니다.</div>
-</div>
+<div>
+  <input id="n" placeholder="이름 (예: 김서연)">
+  <input id="b" inputmode="numeric" placeholder="생년월일 (예: 20080514)">
+  <input id="w" placeholder="소원 내용">
+  <button class="btn" onclick="go()">소원 전송</button>
 </div>
 <script>
-var strm,rec,chunks=[],isRec=false,rIv,sec=0,iv;
-window.openCam=async function(){try{strm=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user'},audio:false});var v=document.getElementById('vLive');v.srcObject=strm;v.style.display='block';document.getElementById('cMsg').style.display='none';document.getElementById('rBtn').style.display='flex'}catch(e){}};
-window.toggleRec=function(){var btn=document.getElementById('rBtn'),bdg=document.getElementById('rBdg');if(!isRec){chunks=[];try{rec=new MediaRecorder(strm)}catch(e){return}rec.ondataavailable=function(e){if(e.data.size>0)chunks.push(e.data)};rec.onstop=function(){var vp=document.getElementById('vPlay');vp.src=URL.createObjectURL(new Blob(chunks,{type:rec.mimeType||'video/mp4'}));document.getElementById('vLive').style.display='none';vp.style.display='block';vp.play().catch(function(){});btn.style.display='none';document.getElementById('reBtn').style.display='block'};rec.start();isRec=true;sec=0;btn.style.background='#fff';bdg.style.display='flex';rIv=setInterval(function(){sec++;document.getElementById('rSec').innerText='00:'+String(sec).padStart(2,'0')},1000)}else{rec.stop();isRec=false;clearInterval(rIv);btn.style.background='transparent';bdg.style.display='none'}};
-window.reTake=function(){var vp=document.getElementById('vPlay');vp.pause();vp.style.display='none';document.getElementById('vLive').style.display='block';document.getElementById('rBtn').style.display='flex';document.getElementById('reBtn').style.display='none'};
-function runTmr(e){clearInterval(iv);var f=function(){var d=Math.max(0,e-Date.now());document.getElementById('tmr').innerText=[Math.floor(d/36e5),Math.floor(d%36e5/6e4),Math.floor(d%6e4/1e3)].map(function(x){return String(x).padStart(2,'0')}).join(':')};f();iv=setInterval(f,1000)}
-window.sendWish=function(){var n=document.getElementById('n').value.trim(),b=document.getElementById('b').value.trim(),w=document.getElementById('w').value.trim();if(!n||!w){alert('이름과 소원을 입력하세요.');return}if(isRec&&rec)try{rec.stop()}catch(e){}if(strm)strm.getTracks().forEach(function(t){t.stop()});document.getElementById('s2').style.display='none';document.getElementById('s3').style.display='flex';var e=Date.now()+864e5,m=b?n+' ('+b+')':n;localStorage.setItem('ge',e);localStorage.setItem('gm',m);localStorage.setItem('gw',w);setTimeout(function(){document.getElementById('m1').innerText=document.getElementById('m2').innerText=m;document.getElementById('w1').innerText=document.getElementById('w2').innerText='"'+w+'"';runTmr(e);document.getElementById('s3').style.display='none';document.getElementById('s4').style.display='flex'},2500)};
-var se=localStorage.getItem('ge'),sw=localStorage.getItem('gw');if(se&&sw){document.getElementById('m2').innerText=localStorage.getItem('gm')||'';document.getElementById('w2').innerText='"'+sw+'"';runTmr(+se);document.getElementById('s1').style.display='none';document.getElementById('s5').style.display='flex'}
+navigator.mediaDevices.getUserMedia({video:{facingMode:'user'}}).then(s=>{document.getElementById('v').srcObject=s;document.getElementById('msg').style.display='none'}).catch(()=>{});
+function go(){
+  const n=document.getElementById('n').value.trim(),b=document.getElementById('b').value.trim(),w=document.getElementById('w').value.trim();
+  if(!n||!w){alert('이름과 소원을 입력하세요');return;}
+  localStorage.setItem('g_meta',b?n+' ('+b+')':n);
+  localStorage.setItem('g_wish',w);
+  location.href='loading.html';
+}
+</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>기리고</title>
+<style>
+body{margin:0;background:#000;color:#fff;font-family:sans-serif;height:100dvh;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:18px;text-align:center}
+@keyframes p{0%,100%{opacity:.4}50%{opacity:1}}
+svg{animation:p 1.5s infinite}
+</style>
+</head>
+<body>
+<svg width="95" height="95" viewBox="0 0 180 180" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M90 26 C85 26 82 31 81 38 L72 86 L58 108 C54 114 57 121 63 125 L79 133 C84 136 88 133 90 127 Z"/><path d="M90 26 C95 26 98 31 99 38 L108 86 L122 108 C126 114 123 121 117 125 L101 133 C96 136 92 133 90 127 Z"/><path d="M66 127 L57 156 M83 133 L79 158 M114 127 L123 156 M97 133 L101 158"/></svg>
+<div style="font-size:19px;letter-spacing:2px">소원이 전달되고 있습니다...</div>
+<div style="font-size:12px;color:#777">잠시만 기다려 주십시오</div>
+<script>setTimeout(()=>location.href='done.html',2800)</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>기리고</title>
+<style>
+body{margin:0;background:#000;color:#fff;font-family:sans-serif;height:100dvh;display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:30px 24px;box-sizing:border-box;text-align:center}
+.mid{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:18px;width:100%}
+.box{width:100%;max-width:380px;border-top:1px solid #222;border-bottom:1px solid #222;padding:16px 8px}
+.btn{width:100%;max-width:380px;padding:16px;background:#fff;color:#000;text-decoration:none;font-size:16px;font-weight:700;letter-spacing:4px;display:block}
+</style>
+</head>
+<body>
+<div></div>
+<div class="mid">
+  <svg width="64" height="64" viewBox="0 0 180 180" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M90 26 C85 26 82 31 81 38 L72 86 L58 108 C54 114 57 121 63 125 L79 133 C84 136 88 133 90 127 Z"/><path d="M90 26 C95 26 98 31 99 38 L108 86 L122 108 C126 114 123 121 117 125 L101 133 C96 136 92 133 90 127 Z"/><path d="M66 127 L57 156 M83 133 L79 158 M114 127 L123 156 M97 133 L101 158"/></svg>
+  <div style="font-size:20px;letter-spacing:2px">소원이 이루어졌습니다.</div>
+  <div class="box">
+    <div id="m" style="font-size:12px;color:#888;margin-bottom:6px"></div>
+    <div id="w" style="font-size:15px"></div>
+  </div>
+</div>
+<a href="timer.html" class="btn" onclick="localStorage.setItem('g_end',Date.now()+86400000)">확인</a>
+<script>
+document.getElementById('m').innerText=localStorage.getItem('g_meta')||'';
+document.getElementById('w').innerText='"'+(localStorage.getItem('g_wish')||'')+'"';
+</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>기리고</title>
+<style>
+body{margin:0;background:#000;color:#fff;font-family:sans-serif;height:100dvh;display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:30px 24px;box-sizing:border-box;text-align:center}
+.mid{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px;width:100%}
+.tmr{font-family:monospace;font-size:44px;letter-spacing:4px}
+.box{width:100%;max-width:380px;border-top:1px solid #222;border-bottom:1px solid #222;padding:14px 8px}
+</style>
+</head>
+<body>
+<div style="padding-top:10px"><svg width="54" height="54" viewBox="0 0 180 180" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M90 26 C85 26 82 31 81 38 L72 86 L58 108 C54 114 57 121 63 125 L79 133 C84 136 88 133 90 127 Z"/><path d="M90 26 C95 26 98 31 99 38 L108 86 L122 108 C126 114 123 121 117 125 L101 133 C96 136 92 133 90 127 Z"/><path d="M66 127 L57 156 M83 133 L79 158 M114 127 L123 156 M97 133 L101 158"/></svg></div>
+<div class="mid">
+  <div style="font-size:12px;color:#777;letter-spacing:3px">남은 시간</div>
+  <div class="tmr" id="t">24:00:00</div>
+  <div class="box">
+    <div id="m" style="font-size:12px;color:#888;margin-bottom:6px"></div>
+    <div id="w" style="font-size:13px;color:#888"></div>
+  </div>
+</div>
+<a href="index.html" style="font-size:11px;color:#555;text-decoration:none">제한 시간 내에 다른 사람을 초대하지 않으면 대가를 치릅니다.</a>
+<script>
+document.getElementById('m').innerText=localStorage.getItem('g_meta')||'';
+document.getElementById('w').innerText='"'+(localStorage.getItem('g_wish')||'')+'"';
+const end=Number(localStorage.getItem('g_end'))||(Date.now()+86400000);
+setInterval(()=>{
+  const d=Math.max(0,end-Date.now());
+  document.getElementById('t').innerText=[Math.floor(d/36e5),Math.floor(d%36e5/6e4),Math.floor(d%6e4/1e3)].map(x=>String(x).padStart(2,'0')).join(':');
+},1000);
 </script>
 </body>
 </html>
