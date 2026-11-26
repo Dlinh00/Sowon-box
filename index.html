@@ -4,70 +4,163 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="기리고">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://w3.org' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' fill='%23090305'/%3E%3Ccircle cx='90' cy='90' r='68' fill='none' stroke='%23b8860b' stroke-width='4'/%3E%3Ccircle cx='90' cy='90' r='54' fill='none' stroke='%238b0000' stroke-width='3' stroke-dasharray='8 5'/%3E%3Cpolygon points='90,26 106,74 154,90 106,106 90,154 74,106 26,90 74,74' fill='none' stroke='%23d4af37' stroke-width='3.5'/%3E%3Ccircle cx='90' cy='90' r='10' fill='%23b31b1b'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://w3.org' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' fill='%23000000'/%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M90 36 L68 92 L54 114 L76 126 L90 104 Z'/%3E%3Cpath d='M90 36 L112 92 L126 114 L104 126 L90 104 Z'/%3E%3Cpath d='M62 120 L52 144 M118 120 L128 144'/%3E%3C/g%3E%3C/svg%3E">
 <title>기리고</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:radial-gradient(circle,#1c080d 0%,#040304 100%);color:#e6d5b8;font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;height:100vh;display:flex;justify-content:center;align-items:center;overflow:hidden}
-.app{width:100%;max-width:400px;height:100%;max-height:760px;padding:26px 24px;display:flex;flex-direction:column;justify-content:space-between;text-align:center;border:1px solid #3d161e;background:rgba(10,6,8,.9);box-shadow:0 0 45px rgba(150,0,0,.3)}
-.seal{width:84px;height:84px;margin:0 auto 10px;transition:transform 2.5s cubic-bezier(.22,1,.36,1);filter:drop-shadow(0 0 12px rgba(212,175,55,.45))}
-.spin{transform:rotate(360deg) scale(1.06)}
-h1{font-size:26px;letter-spacing:8px;font-weight:600;color:#d4af37;text-shadow:0 0 12px rgba(212,175,55,.4);padding-left:8px}
-.counter{margin-top:8px;font-size:13px;color:#a84444;letter-spacing:1px}
-.area{display:flex;flex-direction:column;gap:14px}
-textarea{width:100%;height:100px;background:rgba(255,255,255,.03);border:1px solid #4d2028;border-radius:8px;padding:12px;color:#f5ebd6;font-size:15px;resize:none;outline:none}
-textarea:focus{border-color:#b8860b}
-button{background:linear-gradient(135deg,#520d17 0%,#240408 100%);color:#f0dec0;border:1px solid #963838;padding:14px;border-radius:8px;font-size:16px;letter-spacing:3px;font-weight:500;box-shadow:0 4px 15px rgba(139,0,0,.3)}
-button:active{transform:scale(.98)}
-button:disabled,textarea:disabled{opacity:.4}
-.status{min-height:135px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-size:14px;line-height:1.4;opacity:0;transition:opacity .8s ease}
-.show{opacity:1}
-.granted{color:#d4af37;font-weight:bold;font-size:15px}
-.warn{color:#cf3838;font-size:13px}
-.timer-box{margin-top:6px;padding:8px 16px;border:1px solid #631822;border-radius:6px;background:rgba(74,14,23,.3)}
-.timer-label{font-size:11px;color:#b06868;letter-spacing:1px}
-.timer{font-family:monospace;font-size:24px;color:#ff3333;font-weight:bold;letter-spacing:2px;text-shadow:0 0 10px rgba(255,51,51,.65)}
-.footer{font-size:11px;color:#5e4949}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{background:#000;color:#fff;font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;height:100vh;display:flex;justify-content:center;align-items:center;overflow:hidden}
+.app{width:100%;max-width:420px;height:100%;padding:36px 28px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative}
+.screen{display:none;width:100%;height:100%;flex-direction:column;justify-content:space-between;align-items:center;animation:fadeIn .7s ease}
+.screen.active{display:flex}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:.75;transform:scale(1)}50%{opacity:1;transform:scale(1.04)}}
+.hands{width:96px;height:96px;animation:pulse 3s infinite ease-in-out}
+.hands-sm{width:54px;height:54px;opacity:.85}
+.title{font-size:28px;letter-spacing:12px;font-weight:300;padding-left:12px;margin-top:18px}
+.sub{font-size:13px;color:#888;letter-spacing:2px;margin-top:10px}
+.btn{width:100%;padding:16px;background:#fff;color:#000;border:1px solid #fff;font-size:15px;font-weight:600;letter-spacing:4px;cursor:pointer;transition:all .2s}
+.btn:active{background:#000;color:#fff}
+.btn-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35);margin-top:12px;font-weight:400}
+.btn-ghost:active{background:#fff;color:#000}
+.input-group{width:100%;display:flex;flex-direction:column;gap:14px;text-align:left}
+label{font-size:12px;color:#999;letter-spacing:2px}
+input,textarea{width:100%;background:#000;border:1px solid #444;color:#fff;padding:14px;font-size:15px;outline:none;border-radius:0}
+input:focus,textarea:focus{border-color:#fff}
+textarea{height:130px;resize:none;line-height:1.6}
+.center-box{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;gap:20px}
+.msg-main{font-size:20px;font-weight:400;letter-spacing:2px;line-height:1.6}
+.msg-wish{font-size:14px;color:#aaa;border-top:1px solid #222;border-bottom:1px solid #222;padding:14px 10px;width:100%;word-break:keep-all}
+.timer{font-family:'Courier New',monospace;font-size:44px;font-weight:300;letter-spacing:4px;margin:10px 0}
+.timer-desc{font-size:12px;color:#777;letter-spacing:3px}
+.reset-dot{position:absolute;bottom:14px;right:16px;width:24px;height:24px;opacity:0}
 </style>
 </head>
 <body>
 <div class="app">
-  <div style="margin-top:10px">
-    <svg class="seal" id="sym" viewBox="0 0 120 120">
-      <circle cx="60" cy="60" r="54" fill="none" stroke="#b8860b" stroke-width="2"/>
-      <circle cx="60" cy="60" r="46" fill="none" stroke="#8b1a1a" stroke-width="1.5" stroke-dasharray="5 3"/>
-      <polygon points="60,10 71,49 110,60 71,71 60,110 49,71 10,60 49,49" fill="none" stroke="#d4af37" stroke-width="2"/>
-      <polygon points="25,25 60,44 95,25 76,60 95,95 60,76 25,95 44,60" fill="none" stroke="#a32626" stroke-width="1.5"/>
-      <circle cx="60" cy="60" r="14" fill="none" stroke="#d4af37" stroke-width="1.5"/>
-      <circle cx="60" cy="60" r="5" fill="#c92a2a"/>
-    </svg>
-    <h1>기리고</h1>
-    <div class="counter" id="cnt">남은 소원: 7 / 7</div>
+
+  <!-- MÀN HÌNH 1: MỞ APP -->
+  <div class="screen active" id="s1">
+    <div></div>
+    <div class="center-box">
+      <svg class="hands" viewBox="0 0 120 120" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M60 18 L43 62 L32 80 L49 90 L60 72 Z"/>
+        <path d="M60 18 L77 62 L88 80 L71 90 L60 72 Z"/>
+        <path d="M38 85 L30 104 M82 85 L90 104"/>
+        <path d="M60 8 V12 M34 22 L37 25 M86 22 L83 25" stroke-width="1.5" opacity=".6"/>
+      </svg>
+      <div class="title">기리고</div>
+      <div class="sub">소원을 들어주는 앱</div>
+    </div>
+    <button class="btn" onclick="go('s2')">소원 빌기</button>
   </div>
-  <div class="area">
-    <textarea id="inp" placeholder="당신의 소원을 입력하세요...&#10;모든 소원에는 대가가 따릅니다."></textarea>
-    <button id="btn" onclick="wish()">소원 빌기</button>
-  </div>
-  <div class="status" id="st">
-    <div class="granted" id="gTxt"></div>
-    <div class="warn" id="wTxt"></div>
-    <div class="timer-box" id="tBox" style="display:none">
-      <div class="timer-label">대가까지 남은 시간</div>
-      <div class="timer" id="tmr">24:00:00</div>
+
+  <!-- MÀN HÌNH 2: NHẬP ĐIỀU ƯỚC -->
+  <div class="screen" id="s2">
+    <div style="width:100%;text-align:center;padding-top:10px">
+      <div style="font-size:16px;letter-spacing:6px;padding-left:6px">기리고</div>
+    </div>
+    <div class="input-group">
+      <label>이름</label>
+      <input type="text" id="uName" placeholder="이름을 입력하세요">
+      <label style="margin-top:8px">당신의 소원</label>
+      <textarea id="uWish" placeholder="간절히 바라는 소원을 적으세요.&#10;소원이 이루어지면 대가가 따릅니다."></textarea>
+    </div>
+    <div style="width:100%">
+      <button class="btn" onclick="submitWish()">소원 전송</button>
+      <button class="btn btn-ghost" onclick="go('s1')">취소</button>
     </div>
   </div>
-  <div class="footer">7번째 소원이 끝나면, 모든 것을 잃게 됩니다.</div>
+
+  <!-- MÀN HÌNH 3: ĐANG THỰC HIỆN -->
+  <div class="screen" id="s3">
+    <div></div>
+    <div class="center-box">
+      <svg class="hands" viewBox="0 0 120 120" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M60 18 L43 62 L32 80 L49 90 L60 72 Z"/>
+        <path d="M60 18 L77 62 L88 80 L71 90 L60 72 Z"/>
+        <path d="M38 85 L30 104 M82 85 L90 104"/>
+      </svg>
+      <div class="msg-main">소원 전송 중...</div>
+      <div class="sub">당신의 소원이 이루어지고 있습니다</div>
+    </div>
+    <div></div>
+  </div>
+
+  <!-- MÀN HÌNH 4: ĐIỀU ƯỚC THÀNH SỰ THẬT -->
+  <div class="screen" id="s4">
+    <div></div>
+    <div class="center-box">
+      <svg class="hands-sm" viewBox="0 0 120 120" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M60 18 L43 62 L32 80 L49 90 L60 72 Z"/>
+        <path d="M60 18 L77 62 L88 80 L71 90 L60 72 Z"/>
+        <path d="M38 85 L30 104 M82 85 L90 104"/>
+      </svg>
+      <div class="msg-main">당신의 소원이<br>이루어졌습니다.</div>
+      <div class="msg-wish" id="showWish"></div>
+    </div>
+    <button class="btn" onclick="go('s5')">확인</button>
+  </div>
+
+  <!-- MÀN HÌNH 5: ĐỒNG HỒ ĐẾM NGƯỢC -->
+  <div class="screen" id="s5">
+    <div style="padding-top:16px">
+      <svg class="hands-sm" viewBox="0 0 120 120" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M60 18 L43 62 L32 80 L49 90 L60 72 Z"/>
+        <path d="M60 18 L77 62 L88 80 L71 90 L60 72 Z"/>
+        <path d="M38 85 L30 104 M82 85 L90 104"/>
+      </svg>
+    </div>
+    <div class="center-box">
+      <div class="timer-desc">남은 시간</div>
+      <div class="timer" id="tmr">24:00:00</div>
+      <div class="msg-wish" id="finalWish" style="font-size:13px;color:#666"></div>
+    </div>
+    <div style="font-size:11px;color:#444;letter-spacing:2px;padding-bottom:10px">시간이 끝나면 대가를 치르게 됩니다.</div>
+    <div class="reset-dot" onclick="resetApp()"></div>
+  </div>
+
 </div>
+
 <script>
-let n=localStorage.getItem('girigo_n')!==null?parseInt(localStorage.getItem('girigo_n')):7;
-let end=localStorage.getItem('girigo_end')?parseInt(localStorage.getItem('girigo_end')):0;
 let iv=null;
-const w=["곧 현실이 될 것입니다...","주변을 조심하세요.","대가가 이미 시작되었습니다.","돌이킬 수 없습니다.","누군가 당신의 곁을 떠날 것입니다.","마지막 기회가 다가오고 있습니다.","이제 기리고가 당신의 영혼을 거둡니다."];
-function lock(){document.getElementById('btn').disabled=true;const i=document.getElementById('inp');i.disabled=true;i.placeholder="더 이상 소원을 빌 수 없습니다."}
-function startTmr(){
-  if(!end)return;
-  document.getElementById('tBox').style.display='block';
+function go(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+function sound(){
+  try{
+    const c=new(window.AudioContext||window.webkitAudioContext)();
+    [440,523.25,493.88,392].forEach((f,i)=>{
+      const o=c.createOscillator(),g=c.createGain();
+      o.type='sine';o.frequency.setValueAtTime(f,c.currentTime+i*.5);
+      g.gain.setValueAtTime(.12,c.currentTime+i*.5);
+      g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+i*.5+1.4);
+      o.connect(g);g.connect(c.destination);
+      o.start(c.currentTime+i*.5);o.stop(c.currentTime+i*.5+1.5);
+    });
+  }catch(e){}
+}
+function submitWish(){
+  const name=document.getElementById('uName').value.trim();
+  const wish=document.getElementById('uWish').value.trim();
+  if(!wish)return;
+  sound();
+  go('s3');
+  const end=Date.now()+24*60*60*1000;
+  localStorage.setItem('girigo_v2_end',end);
+  localStorage.setItem('girigo_v2_wish',wish);
+  localStorage.setItem('girigo_v2_name',name);
+  setTimeout(()=>{
+    const label=name?`${name}님의 소원: "${wish}"`:`"${wish}"`;
+    document.getElementById('showWish').innerText=label;
+    document.getElementById('finalWish').innerText=label;
+    startTmr(end);
+    go('s4');
+  },3200);
+}
+function startTmr(end){
   clearInterval(iv);
   const tick=()=>{
     const diff=Math.max(0,end-Date.now());
@@ -75,37 +168,30 @@ function startTmr(){
     const m=String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
     const s=String(Math.floor((diff%60000)/1000)).padStart(2,'0');
     document.getElementById('tmr').innerText=`${h}:${m}:${s}`;
-    if(diff<=0)clearInterval(iv);
+    if(diff<=0){
+      clearInterval(iv);
+      document.querySelector('.timer-desc').innerText='시간 종료';
+    }
   };
   tick();iv=setInterval(tick,1000);
 }
-document.getElementById('cnt').innerText=`남은 소원: ${n} / 7`;
-if(n<7){
-  document.getElementById('st').classList.add('show');
-  document.getElementById('wTxt').innerText=w[Math.min(6,6-n)];
-  startTmr();
+function resetApp(){
+  localStorage.removeItem('girigo_v2_end');
+  localStorage.removeItem('girigo_v2_wish');
+  localStorage.removeItem('girigo_v2_name');
+  location.reload();
 }
-if(n<=0)lock();
-function sound(){const c=new(window.AudioContext||window.webkitAudioContext)();[523.25,659.25,783.99,622.25,523.25,493.88].forEach((f,i)=>{const o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.setValueAtTime(f,c.currentTime+i*.45);g.gain.setValueAtTime(.15,c.currentTime+i*.45);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+i*.45+1.2);o.connect(g);g.connect(c.destination);o.start(c.currentTime+i*.45);o.stop(c.currentTime+i*.45+1.3)})}
-function wish(){
-  const i=document.getElementById('inp'),st=document.getElementById('st'),m=document.getElementById('sym'),txt=i.value.trim();
-  if(!txt||n<=0)return;
-  sound();m.classList.toggle('spin');
-  const idx=7-n;n--;
-  end=Date.now()+24*60*60*1000;
-  localStorage.setItem('girigo_n',n);
-  localStorage.setItem('girigo_end',end);
-  document.getElementById('cnt').innerText=`남은 소원: ${n} / 7`;
-  st.classList.remove('show');
-  setTimeout(()=>{
-    document.getElementById('gTxt').innerHTML=`당신의 소원이 이루어졌습니다:<br>"${txt}"`;
-    document.getElementById('wTxt').innerText=w[idx];
-    startTmr();
-    st.classList.add('show');
-    i.value="";
-    if(n===0)lock();
-  },600);
-}
+window.onload=()=>{
+  const savedEnd=localStorage.getItem('girigo_v2_end');
+  const savedWish=localStorage.getItem('girigo_v2_wish');
+  const savedName=localStorage.getItem('girigo_v2_name');
+  if(savedEnd&&savedWish){
+    const label=savedName?`${savedName}님의 소원: "${savedWish}"`:`"${savedWish}"`;
+    document.getElementById('finalWish').innerText=label;
+    startTmr(parseInt(savedEnd));
+    go('s5');
+  }
+};
 </script>
 </body>
 </html>
