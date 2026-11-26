@@ -2,175 +2,115 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="기리고">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://w3.org' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' fill='%23000000'/%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M90 30 C86 30 83 34 82 40 L74 84 L62 104 C59 109 61 115 66 118 L80 126 C84 128 88 126 90 121 Z'/%3E%3Cpath d='M90 30 C94 30 97 34 98 40 L106 84 L118 104 C121 109 119 115 114 118 L100 126 C96 128 92 126 90 121 Z'/%3E%3Cpath d='M68 120 L60 148 M84 125 L80 150 M112 120 L120 148 M96 125 L100 150'/%3E%3C/g%3E%3C/svg%3E">
 <title>기리고</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{background:#000;color:#fff;font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;height:100dvh;width:100%;overflow:hidden}
-body{display:flex;justify-content:center;align-items:center}
-.app{width:100%;max-width:420px;height:100dvh;padding:28px 24px calc(28px + env(safe-area-inset-bottom));display:flex;flex-direction:column;justify-content:space-between;align-items:center;text-align:center;position:relative}
-.screen{display:none;width:100%;height:100%;flex-direction:column;justify-content:space-between;align-items:center}
-.screen.active{display:flex}
-@keyframes pulse{0%,100%{opacity:.75;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
-.hands-box{pointer-events:none;animation:pulse 3s infinite ease-in-out}
-.title{font-size:26px;letter-spacing:14px;font-weight:300;padding-left:14px;margin-top:14px;pointer-events:none}
-.sub{font-size:12px;color:#777;letter-spacing:2px;margin-top:8px;pointer-events:none}
-.btn{width:100%;padding:16px;background:#fff;color:#000;border:1px solid #fff;font-size:15px;font-weight:600;letter-spacing:4px;cursor:pointer;position:relative;z-index:20;touch-action:manipulation}
-.btn:active{background:#000;color:#fff}
-.btn-ghost{background:transparent;color:#888;border:1px solid #333;margin-top:10px;font-weight:400;font-size:13px;padding:12px}
-.form{width:100%;display:flex;flex-direction:column;gap:10px;text-align:left;overflow-y:auto;position:relative;z-index:10}
-label{font-size:11px;color:#888;letter-spacing:2px}
-input,textarea{width:100%;background:#080808;border:1px solid #333;color:#fff;padding:12px;font-size:15px;outline:none;border-radius:0}
-input:focus,textarea:focus{border-color:#fff}
-textarea{height:84px;resize:none;line-height:1.5}
-.cam-box{width:100%;height:115px;border:1px solid #333;background:#050505;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;cursor:pointer}
-video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1);display:none}
-.rec-dot{position:absolute;top:8px;left:10px;font-size:11px;color:#fff;display:none;align-items:center;gap:5px;background:rgba(0,0,0,.65);padding:2px 7px}
-.rec-dot span{width:7px;height:7px;background:#fff;border-radius:50%}
-.center-box{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;gap:16px;width:100%;pointer-events:none}
-.msg-main{font-size:20px;font-weight:400;letter-spacing:2px;line-height:1.6}
-.info-card{width:100%;border-top:1px solid #262626;border-bottom:1px solid #262626;padding:14px 10px;display:flex;flex-direction:column;gap:8px}
-.info-meta{font-size:12px;color:#777;letter-spacing:2px}
-.info-wish{font-size:15px;color:#fff;line-height:1.5;word-break:keep-all}
-.timer{font-family:'Courier New',monospace;font-size:44px;font-weight:300;letter-spacing:4px;margin:6px 0}
-.timer-desc{font-size:12px;color:#777;letter-spacing:3px}
-.reset-dot{position:absolute;bottom:10px;right:10px;width:32px;height:32px;opacity:0;z-index:30}
+body{background:#000;color:#fff;font-family:sans-serif;height:100vh;height:100dvh;display:flex;justify-content:center;align-items:center;overflow:hidden}
+.app{width:100%;max-width:420px;height:100%;padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;text-align:center}
+.scr{display:none;width:100%;height:100%;flex-direction:column;justify-content:space-between;align-items:center}
+.on{display:flex}
+.btn{width:100%;padding:16px;background:#fff;color:#000;border:1px solid #fff;font-size:15px;font-weight:700;letter-spacing:4px;cursor:pointer}
+.btn2{width:100%;padding:12px;background:#000;color:#888;border:1px solid #333;font-size:13px;margin-top:8px}
+input,textarea{width:100%;background:#080808;border:1px solid #444;color:#fff;padding:12px;font-size:15px;outline:none;margin-top:4px;margin-bottom:10px}
+textarea{height:85px;resize:none}
+label{font-size:11px;color:#888;display:block;text-align:left;letter-spacing:2px}
+.mid{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:16px;width:100%}
+.tmr{font-family:monospace;font-size:44px;letter-spacing:4px;margin:8px 0}
+.box{width:100%;border-top:1px solid #222;border-bottom:1px solid #222;padding:14px 8px}
 </style>
 </head>
 <body>
 <div class="app">
 
-  <div class="screen active" id="s1">
-    <div></div>
-    <div class="center-box">
-      <div class="hands-box">
-        <svg width="110" height="110" viewBox="0 0 180 180" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M90 26 C85 26 82 31 81 38 L72 86 L58 108 C54 114 57 121 63 125 L79 133 C84 136 88 133 90 127 Z"/>
-          <path d="M90 26 C95 26 98 31 99 38 L108 86 L122 108 C126 114 123 121 117 125 L101 133 C96 136 92 133 90 127 Z"/>
-          <path d="M76 46 L69 89 M83 35 L78 91 M104 46 L111 89 M97 35 L102 91" stroke-width="1.6" opacity=".7"/>
-          <path d="M66 127 L57 156 M83 133 L79 158 M114 127 L123 156 M97 133 L101 158"/>
-        </svg>
-      </div>
-      <div class="title">기리고</div>
-    </div>
-    <button type="button" class="btn" onclick="go('s2')">소원 빌기</button>
+<div class="scr on" id="s1">
+  <div></div>
+  <div class="mid">
+    <svg width="110" height="110" viewBox="0 0 180 180" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M90 26 C85 26 82 31 81 38 L72 86 L58 108 C54 114 57 121 63 125 L79 133 C84 136 88 133 90 127 Z"/>
+      <path d="M90 26 C95 26 98 31 99 38 L108 86 L122 108 C126 114 123 121 117 125 L101 133 C96 136 92 133 90 127 Z"/>
+      <path d="M76 46 L69 89 M83 35 L78 91 M104 46 L111 89 M97 35 L102 91" stroke-width="1.6" opacity=".7"/>
+      <path d="M66 127 L57 156 M83 133 L79 158 M114 127 L123 156 M97 133 L101 158"/>
+    </svg>
+    <div style="font-size:26px;letter-spacing:14px;padding-left:14px;font-weight:300">기리고</div>
   </div>
-
-  <div class="screen" id="s2">
-    <div style="font-size:15px;letter-spacing:8px;padding-left:8px">기리고</div>
-    <div class="form">
-      <div class="cam-box" onclick="startCam()">
-        <video id="vid" autoplay playsinline muted></video>
-        <div class="rec-dot" id="recDot"><span></span>REC</div>
-        <div id="camHint" style="font-size:12px;color:#777">+ 얼굴 인증 카메라 켜기 (선택)</div>
-      </div>
-      <label>이름</label>
-      <input type="text" id="uName" placeholder="예: 김서연">
-      <label>생년월일</label>
-      <input type="text" id="uBirth" inputmode="numeric" placeholder="예: 20080514">
-      <label>소원 내용</label>
-      <textarea id="uWish" placeholder="당신의 소원을 입력하세요."></textarea>
-    </div>
-    <div style="width:100%">
-      <button type="button" class="btn" onclick="submitWish()">소원 전송</button>
-      <button type="button" class="btn btn-ghost" onclick="go('s1')">취소</button>
-    </div>
-  </div>
-
-  <div class="screen" id="s3">
-    <div></div>
-    <div class="center-box">
-      <div class="hands-box">
-        <svg width="100" height="100" viewBox="0 0 180 180" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M90 26 C85 26 82 31 81 38 L72 86 L58 108 C54 114 57 121 63 125 L79 133 C84 136 88 133 90 127 Z"/>
-          <path d="M90 26 C95 26 98 31 99 38 L108 86 L122 108 C126 114 123 121 117 125 L101 133 C96 136 92 133 90 127 Z"/>
-          <path d="M66 127 L57 156 M83 133 L79 158 M114 127 L123 156 M97 133 L101 158"/>
-        </svg>
-      </div>
-      <div class="msg-main">소원이 전달되고 있습니다...</div>
-      <div class="sub">잠시만 기다려 주십시오</div>
-    </div>
-    <div></div>
-  </div>
-
-  <div class="screen" id="s4">
-    <div></div>
-    <div class="center-box">
-      <svg width="64" height="64" viewBox="0 0 180 180" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M90 26 C85 26 82 31 81 38 L72 86 L58 108 C54 114 57 121 63 125 L79 133 C84 136 88 133 90 127 Z"/>
-        <path d="M90 26 C95 26 98 31 99 38 L108 86 L122 108 C126 114 123 121 117 125 L101 133 C96 136 92 133 90 127 Z"/>
-        <path d="M66 127 L57 156 M83 133 L79 158 M114 127 L123 156 M97 133 L101 158"/>
-      </svg>
-      <div class="msg-main">소원이 이루어졌습니다.</div>
-      <div class="info-card">
-        <div class="info-meta" id="metaTxt"></div>
-        <div class="info-wish" id="showWish"></div>
-      </div>
-    </div>
-    <button type="button" class="btn" onclick="go('s5')">확인</button>
-  </div>
-
-  <div class="screen" id="s5">
-    <div style="padding-top:10px;pointer-events:none">
-      <svg width="56" height="56" viewBox="0 0 180 180" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M90 26 C85 26 82 31 81 38 L72 86 L58 108 C54 114 57 121 63 125 L79 133 C84 136 88 133 90 127 Z"/>
-        <path d="M90 26 C95 26 98 31 99 38 L108 86 L122 108 C126 114 123 121 117 125 L101 133 C96 136 92 133 90 127 Z"/>
-        <path d="M66 127 L57 156 M83 133 L79 158 M114 127 L123 156 M97 133 L101 158"/>
-      </svg>
-    </div>
-    <div class="center-box">
-      <div class="timer-desc">남은 시간</div>
-      <div class="timer" id="tmr">24:00:00</div>
-      <div class="info-card">
-        <div class="info-meta" id="finalMeta"></div>
-        <div class="info-wish" id="finalWish" style="font-size:13px;color:#888"></div>
-      </div>
-    </div>
-    <div style="font-size:11px;color:#555;letter-spacing:2px;padding-bottom:6px">제한 시간 내에 다른 사람을 초대하지 않으면 대가를 치릅니다.</div>
-    <div class="reset-dot" onclick="resetApp()"></div>
-  </div>
-
+  <button type="button" class="btn" onclick="document.getElementById('s1').className='scr';document.getElementById('s2').className='scr on'">소원 빌기</button>
 </div>
 
+<div class="scr" id="s2">
+  <div style="font-size:15px;letter-spacing:8px;padding-left:8px">기리고</div>
+  <div style="width:100%">
+    <label>이름</label>
+    <input id="n" placeholder="예: 김서연">
+    <label>생년월일</label>
+    <input id="b" inputmode="numeric" placeholder="예: 20080514">
+    <label>소원 내용</label>
+    <textarea id="w" placeholder="당신의 소원을 입력하세요."></textarea>
+  </div>
+  <div style="width:100%">
+    <button type="button" class="btn" onclick="send()">소원 전송</button>
+    <button type="button" class="btn2" onclick="document.getElementById('s2').className='scr';document.getElementById('s1').className='scr on'">취소</button>
+  </div>
+</div>
+
+<div class="scr" id="s3">
+  <div></div>
+  <div class="mid">
+    <svg width="95" height="95" viewBox="0 0 180 180" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M90 26 C85 26 82 31 81 38 L72 86 L58 108 C54 114 57 121 63 125 L79 133 C84 136 88 133 90 127 Z"/>
+      <path d="M90 26 C95 26 98 31 99 38 L108 86 L122 108 C126 114 123 121 117 125 L101 133 C96 136 92 133 90 127 Z"/>
+      <path d="M66 127 L57 156 M83 133 L79 158 M114 127 L123 156 M97 133 L101 158"/>
+    </svg>
+    <div style="font-size:19px;letter-spacing:2px">소원이 전달되고 있습니다...</div>
+    <div style="font-size:12px;color:#777">잠시만 기다려 주십시오</div>
+  </div>
+  <div></div>
+</div>
+
+<div class="scr" id="s4">
+  <div></div>
+  <div class="mid">
+    <svg width="64" height="64" viewBox="0 0 180 180" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M90 26 C85 26 82 31 81 38 L72 86 L58 108 C54 114 57 121 63 125 L79 133 C84 136 88 133 90 127 Z"/>
+      <path d="M90 26 C95 26 98 31 99 38 L108 86 L122 108 C126 114 123 121 117 125 L101 133 C96 136 92 133 90 127 Z"/>
+      <path d="M66 127 L57 156 M83 133 L79 158 M114 127 L123 156 M97 133 L101 158"/>
+    </svg>
+    <div style="font-size:20px;letter-spacing:2px">소원이 이루어졌습니다.</div>
+    <div class="box">
+      <div id="m1" style="font-size:12px;color:#888;margin-bottom:6px"></div>
+      <div id="w1" style="font-size:15px"></div>
+    </div>
+  </div>
+  <button type="button" class="btn" onclick="document.getElementById('s4').className='scr';document.getElementById('s5').className='scr on'">확인</button>
+</div>
+
+<div class="scr" id="s5">
+  <div style="padding-top:10px">
+    <svg width="56" height="56" viewBox="0 0 180 180" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M90 26 C85 26 82 31 81 38 L72 86 L58 108 C54 114 57 121 63 125 L79 133 C84 136 88 133 90 127 Z"/>
+      <path d="M90 26 C95 26 98 31 99 38 L108 86 L122 108 C126 114 123 121 117 125 L101 133 C96 136 92 133 90 127 Z"/>
+      <path d="M66 127 L57 156 M83 133 L79 158 M114 127 L123 156 M97 133 L101 158"/>
+    </svg>
+  </div>
+  <div class="mid">
+    <div style="font-size:12px;color:#777;letter-spacing:3px">남은 시간</div>
+    <div class="tmr" id="tmr">24:00:00</div>
+    <div class="box">
+      <div id="m2" style="font-size:12px;color:#888;margin-bottom:6px"></div>
+      <div id="w2" style="font-size:13px;color:#888"></div>
+    </div>
+  </div>
+  <div style="font-size:11px;color:#555;letter-spacing:1px" onclick="localStorage.clear();location.reload()">제한 시간 내에 다른 사람을 초대하지 않으면 대가를 치릅니다.</div>
+</div>
+
+</div>
 <script>
-let iv=null,stream=null;
-function go(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
-async function startCam(){
-  if(stream)return;
-  try{
-    stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user'},audio:false});
-    const v=document.getElementById('vid');
-    v.srcObject=stream;v.style.display='block';
-    document.getElementById('camHint').style.display='none';
-    document.getElementById('recDot').style.display='flex';
-  }catch(e){
-    document.getElementById('camHint').innerText='카메라 권한이 거부되었습니다';
-  }
-}
-function stopCam(){
-  if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}
-}
-function sound(){
-  try{
-    const c=new(window.AudioContext||window.webkitAudioContext)();
-    [440,523.25,493.88,392].forEach((f,i)=>{
-      const o=c.createOscillator(),g=c.createGain();
-      o.type='sine';o.frequency.setValueAtTime(f,c.currentTime+i*.5);
-      g.gain.setValueAtTime(.12,c.currentTime+i*.5);
-      g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+i*.5+1.4);
-      o.connect(g);g.connect(c.destination);
-      o.start(c.currentTime+i*.5);o.stop(c.currentTime+i*.5+1.5);
-    });
-  }catch(e){}
-}
-function submitWish(){
-  const name=document.getElementById('uName').value.trim();
-  const birth=document.getElementById('uBirth').value.trim();
-  const wish=document.getElementById('uWish').value.trim();
+let iv;
+function tmr(e){clearInterval(iv);const f=()=>{const d=Math.max(0,e-Date.now());document.getElementById('tmr').innerText=[Math.floor(d/36e5),Math.floor(d%36e5/6e4),Math.floor(d%6e4/1e3)].map(x=>String(x).padStart(2,'0')).join(':')};f();iv=setInterval(f,1e3)}
+function send(){const n=document.getElementById('n').value.trim(),b=document.getElementById('b').value.trim(),w=document.getElementById('w').value.trim();if(!n||!w)return;document.getElementById('s2').className='scr';document.getElementById('s3').className='scr on';const e=Date.now()+864e5,m=b?n+' ('+b+')':n;localStorage.setItem('ge',e);localStorage.setItem('gm',m);localStorage.setItem('gw',w);setTimeout(()=>{document.getElementById('m1').innerText=document.getElementById('m2').innerText=m;document.getElementById('w1').innerText=document.getElementById('w2').innerText='"'+w+'"';tmr(e);document.getElementById('s3').className='scr';document.getElementById('s4').className='scr on'},2500)}
+const se=localStorage.getItem('ge'),sw=localStorage.getItem('gw');if(se&&sw){document.getElementById('m2').innerText=localStorage.getItem('gm')||'';document.getElementById('w2').innerText='"'+sw+'"';tmr(+se);document.getElementById('s1').className='scr';document.getElementById('s5').className='scr on'}
+</script>
+</body>
+</html>
